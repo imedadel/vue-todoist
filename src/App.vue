@@ -5,6 +5,7 @@
 		<ul>
 			<li v-for="todo in todos" class="flex" v-bind:key="todo.id">
 				{{ todo.text }}
+				<button class="pl-10" v-on:click="removeTodo(todo.id)">X</button>
 			</li>
 		</ul>
 		<img alt="Vue logo" src="./assets/logo.png" />
@@ -20,18 +21,7 @@ export default {
 	data: function() {
 		return {
 			title: 'todoist',
-			todos: [
-				{
-					text: 'todo 1',
-					done: false,
-					id: Date.now(),
-				},
-				{
-					text: 'todo 2',
-					done: false,
-					id: Date.now() + 1,
-				},
-			],
+			todos: [],
 		}
 	},
 	methods: {
@@ -40,9 +30,16 @@ export default {
 			this.todos.push({
 				text,
 				done: false,
-				id: Date.now(),
+				id:
+					'_' +
+					Math.random()
+						.toString(36)
+						.substr(2, 9),
 			})
 			event.target.value = ''
+		},
+		removeTodo(id) {
+			this.todos = this.todos.filter(todo => todo.id !== id)
 		},
 	},
 	components: {
