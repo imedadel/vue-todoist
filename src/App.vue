@@ -16,14 +16,12 @@
 				<button class="pl-10" v-on:click="removeTodo(todo.id)">X</button>
 			</li>
 		</ul>
-		<img alt="Vue logo" src="./assets/logo.png" />
-		<HelloWorld msg="Welcome to Your Vue.js App" />
 	</div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+// TODO: Use Vuex
 
+<script>
 export default {
 	name: 'app',
 	data: function() {
@@ -52,9 +50,6 @@ export default {
 		check(todo) {
 			todo.done = !todo.done
 		},
-	},
-	components: {
-		HelloWorld,
 	},
 }
 </script>
