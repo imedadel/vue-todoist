@@ -4,7 +4,15 @@
 		<input type="text" placeholder="Add todo…" v-on:keyup.enter="addTodo" />
 		<ul>
 			<li v-for="todo in todos" class="flex" v-bind:key="todo.id">
-				{{ todo.text }}
+				<input
+					type="checkbox"
+					class="pr-10"
+					v-on:click="check(todo)"
+					v-bind:checked="todo.done"
+				/>
+				<span v-bind:class="{ 'line-through': todo.done }">{{
+					todo.text
+				}}</span>
 				<button class="pl-10" v-on:click="removeTodo(todo.id)">X</button>
 			</li>
 		</ul>
@@ -40,6 +48,9 @@ export default {
 		},
 		removeTodo(id) {
 			this.todos = this.todos.filter(todo => todo.id !== id)
+		},
+		check(todo) {
+			todo.done = !todo.done
 		},
 	},
 	components: {
