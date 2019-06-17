@@ -1,6 +1,7 @@
 <template>
 	<div id="app">
 		<h1 class="text-5xl font-sans">{{ title }}</h1>
+		<input type="text" placeholder="Add todo…" v-on:keyup.enter="addTodo" />
 		<ul>
 			<li v-for="todo in todos" class="flex" v-bind:key="todo.id">
 				{{ todo.text }}
@@ -33,7 +34,17 @@ export default {
 			],
 		}
 	},
-	methods: {},
+	methods: {
+		addTodo(event) {
+			const text = event.target.value
+			this.todos.push({
+				text,
+				done: false,
+				id: Date.now(),
+			})
+			event.target.value = ''
+		},
+	},
 	components: {
 		HelloWorld,
 	},
